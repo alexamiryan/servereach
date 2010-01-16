@@ -1,0 +1,11 @@
+#!/bin/sh
+echo Starting Mini server in /opt/miniserv/
+trap '' 1
+LANG=
+export LANG
+#PERLIO=:raw
+unset PERLIO
+export PERLIO
+PERLLIB=/usr/libexec/webmin
+export PERLLIB
+exec '/opt/miniserv/miniserv.pl' /opt/miniserv/miniserv.conf

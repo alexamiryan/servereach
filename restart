@@ -1,0 +1,2 @@
+#!/bin/sh
+/opt/miniserv/stop && /opt/miniserv/start
