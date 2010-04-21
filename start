@@ -1,5 +1,5 @@
 #!/bin/sh
-echo Starting Mini server in /opt/miniserv/
+echo Starting ServerEach in /opt/servereach/
 trap '' 1
 LANG=
 export LANG
@@ -8,4 +8,4 @@ unset PERLIO
 export PERLIO
 PERLLIB=/usr/libexec/webmin
 export PERLLIB
-exec '/opt/miniserv/miniserv.pl' /opt/miniserv/miniserv.conf
+exec '/opt/servereach/miniserv.pl' /opt/servereach/miniserv.conf

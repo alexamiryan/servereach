@@ -1,0 +1,36 @@
+ServerEach
+--------------------
+Version 0.4
+
+Copyright (C) 2008,2009,2010 Alex Amiryan
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+INTRO
+-----
+This program is a tool for linux server administrators for them to configure 
+their web servers more easily.
+
+DESCRIPTION
+---------------------------
+ServerEach is intended both for people with deep understanding of apache and bind 
+server configurations and for people who want just easily to configure basic 
+settings and start using their own web server (for ex. dedicated server).
+  
+INSTALLATION
+------------
+1. Place the ServerEach folder in /opt/servereach
+2. As root execute /opt/servereach/start script
+3. Open your browser and navigate to server-address.com:10011
+4. It will ask for username and password. Login with you system's root account.

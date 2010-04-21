@@ -1,4 +1,4 @@
 #!/bin/sh
-echo Stopping Mini server in /opt/miniserv/
-pidfile=`grep "^pidfile=" /opt/miniserv/miniserv.conf | sed -e 's/pidfile=//g'`
+echo Stopping ServerEach in /opt/servereach/
+pidfile=`grep "^pidfile=" /opt/servereach/miniserv.conf | sed -e 's/pidfile=//g'`
 kill `cat $pidfile`
