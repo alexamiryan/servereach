@@ -76,6 +76,9 @@ if(url_param('action')){
 	if($root eq ''){
 	    error("You have to fill 'Subdomain root directory' field!");
 	}
+	if(!-d $root){
+	    error("'Subdomain root directory' have to be a directory path!");
+	}
 	if($domain eq ''){
 	    error("You have to choose appropriate root domain!");
 	}
@@ -304,7 +307,7 @@ if(url_param('action')){
 	close(ZONE);
 
 	&bind::create_record($zone_file, "$name.", undef, "IN", "SOA", $vals);
-	&bind::create_record($zone_file, "$name.", undef, "IN", "NS", $CONFIG{'SERVER_HOSTNAME'})
+	&bind::create_record($zone_file, "$name.", undef, "IN", "NS", $CONFIG{'SERVER_HOSTNAME'});
 	&bind::create_record($zone_file, "$name.", undef, "IN", "A", $CONFIG{'SERVER_MAIN_IP'}, "Domain $name");
 	&bind::create_record($zone_file, 'www', undef, "IN", "CNAME", $name . '.', "CNAME for $name");
 	

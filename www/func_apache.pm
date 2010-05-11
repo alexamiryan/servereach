@@ -331,9 +331,6 @@ sub parse_config_file{
     ##$$line_num=0 if undef($$line_num);
     while($line = <$fh>) {
         chomp($line);
-	if($line eq 'ServerAdmin root@clife'){
-	    $a;
-	}
         $line =~ s/^\s*#.*$//g;
         if ($line =~ /^\s*<\/(\S+)\s*(.*)>/) {
             # end of a container directive.
