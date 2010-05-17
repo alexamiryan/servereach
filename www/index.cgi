@@ -788,7 +788,48 @@ if(url_param('action')){
 	    push(@info, "Successfuly saved file " . param('file'));
 	}
     }
+    elsif(url_param('action') eq 'httpd_start'){
+	if(!system($CONFIG{'APACHE_START_COMMAND'})){
+	    push(@info, "Successfuly started httpd (apache server)");
+	}
+    }
+    elsif(url_param('action') eq 'httpd_restart'){
+	if(!system($CONFIG{'APACHE_RESTART_COMMAND'})){
+	    push(@info, "Successfuly restarted httpd (apache server)");
+	}
+    }
+    elsif(url_param('action') eq 'httpd_stop'){
+	if(!system($CONFIG{'APACHE_STOP_COMMAND'})){
+	    push(@info, "Successfuly stopped httpd (apache server)");
+	}
+    }
+    elsif(url_param('action') eq 'httpd_reload'){
+	if(!system($CONFIG{'APACHE_RELOAD_COMMAND'})){
+	    push(@info, "Successfuly reloaded httpd (apache server)");
+	}
+    }
+    elsif(url_param('action') eq 'bind_start'){
+	if(!system($CONFIG{'BIND_START_COMMAND'})){
+	    push(@info, "Successfuly started named (BIND DNS server)");
+	}
+    }
+    elsif(url_param('action') eq 'bind_restart'){
+	if(!system($CONFIG{'BIND_RESTART_COMMAND'})){
+	    push(@info, "Successfuly restarted named (BIND DNS server)");
+	}
+    }
+    elsif(url_param('action') eq 'bind_stop'){
+	if(!system($CONFIG{'BIND_STOP_COMMAND'})){
+	    push(@info, "Successfuly stopped named (BIND DNS server)");
+	}
+    }
+    elsif(url_param('action') eq 'bind_reload'){
+	if(!system($CONFIG{'BIND_RELOAD_COMMAND'})){
+	    push(@info, "Successfuly reloaded named (BIND DNS server)");
+	}
+    }
 }
+
 
 &html::get_header if(!grep(url_param('page'),@pages_without_html_headers));
 if(@info){
@@ -839,7 +880,21 @@ if(url_param('page') ne ''){
     elsif(url_param('page') eq 'edit_dns'){
 	&html::get_edit_dns();
     }
-    
+    elsif(url_param('page') eq 'services'){
+        my ($apache_status, $bind_status);
+        
+        my $apache_status_command = `$CONFIG{'APACHE_STATUS_COMMAND'}`;
+        if ($apache_status_command =~ /httpd \(pid  \d+\) is running.../){
+            $apache_status = 1;
+        }
+        
+        my $bind_status_command = `$CONFIG{'BIND_STATUS_COMMAND'}`;
+        if ($bind_status_command =~ /named \(pid  \d+\) is running.../){
+            $bind_status = 1;
+        }
+        
+	&html::get_services($apache_status, $bind_status);
+    }
 }
 else{
     &html::get_apache_simple;

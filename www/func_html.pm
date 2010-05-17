@@ -72,6 +72,9 @@ sub get_apache_simple{
     	<tr>
     		<td><a href="index.cgi?page=access">Restrict access</a></td>
     	</tr>
+        <tr>
+    		<td><a href="index.cgi?page=services">Service Management</a></td>
+    	</tr>
     </table>
 EOF
 }
@@ -88,6 +91,9 @@ sub get_apache_adv{
     	</tr>
     	<tr>
     		<td><a href="index.cgi?page=zones">DNS Zones</a></td>
+    	</tr>
+        <tr>
+    		<td><a href="index.cgi?page=services">Service Management</a></td>
     	</tr>
     	<tr>
     		<td><a href="index.cgi?page=edit_apache">Edit Apache files</a></td>
@@ -319,6 +325,59 @@ EOF
 		</tr>
 EOF
     }
+    print "</table>";
+}
+
+sub get_services{
+    my($apache_status, $bind_status)=@_;
+    &get_apache_menu;
+    my $i=0;
+    
+    print <<EOF;
+    <h2>Service Management</h2>
+    <table cellspacing="1" cellpadding="5" summary="">
+	<tr>
+	    <th>Server</th>
+	    <th>Status</th>
+	    <th>Actions</th>
+	</tr>
+EOF
+    
+    if ($apache_status){
+        $apache_status_html = "<span style=\"color:green\">Running</span>";
+    }
+    else{
+        $apache_status_html = "<span style=\"color:red\">Stopped</span>";
+    }
+    
+    if ($bind_status){
+        $bind_status_html = "<span style=\"color:green\">Running</span>";
+    }
+    else{
+        $bind_status_html = "<span style=\"color:red\">Stopped</span>";
+    }
+    print <<EOF;
+		<tr>
+		    <td>Apache</td>
+		    <td>$apache_status_html</td>
+		    <td>
+                        <a href="index.cgi?page=services&amp;service=apache&amp;action=httpd_start">Start</a> |
+                        <a href="index.cgi?page=services&amp;service=apache&amp;action=httpd_stop">Stop</a> |
+                        <a href="index.cgi?page=services&amp;service=apache&amp;action=httpd_restart">Restart</a> |
+                        <a href="index.cgi?page=services&amp;service=apache&amp;action=httpd_reload">Reload Config</a>
+                    </td>
+		</tr>
+                <tr>
+		    <td>BIND DNS</td>
+		    <td>$bind_status_html</td>
+		    <td>
+                        <a href="index.cgi?page=services&amp;service=bind&amp;action=bind_start">Start</a> |
+                        <a href="index.cgi?page=services&amp;service=bind&amp;action=bind_stop">Stop</a> |
+                        <a href="index.cgi?page=services&amp;service=bind&amp;action=bind_restart">Restart</a> |
+                        <a href="index.cgi?page=services&amp;service=bind&amp;action=bind_reload">Reload Config</a>
+                    </td>
+		</tr>
+EOF
     print "</table>";
 }
 
